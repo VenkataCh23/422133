@@ -1,0 +1,79 @@
+//sample.c
+#include <stdio.h>
+
+int main(){
+    int num;
+    long long factorial=1;
+    printf("Enter a positive integer:");
+    scanf("%d",&num);
+    if (num<0){
+	printf("Error! Factorial of a negative number doesn't exist");
+    }else{
+	int i=1;
+	while (i<=num){
+	    factorial*=i;
+	    i++;
+	    printf("Factorial of %d is = %lld\n",num,factorial);
+	}
+    }
+    return 0;
+}
+
+//prog1.c
+#include <stdio.h>
+
+int main() {
+    char num[10];
+    printf("Enter a number: ");
+    scanf("%s", num);
+
+    int sum = 0;
+    for (int i = 0; num[i] != '\0'; i++) {
+        sum += num[i] - '0';
+    }
+
+    int *ptr = NULL;
+    *ptr = sum;
+    printf("Sum of digits: %d\n", sum);
+    return 0;
+}
+
+//prog2.c
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertNode(struct Node** head_ref, int data) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->data = data;
+    new_node->next = NULL;
+
+    if (*head_ref == NULL) {
+        *head_ref = new_node;
+    } else {
+        struct Node* current = *head_ref;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = new_node;
+    }
+}
+
+int main() {
+    struct Node* head = NULL;
+    insertNode(&head, 10);
+    insertNode(&head, 20);
+
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d\n", current->data);
+        free(current); // freeing current node prematurely
+        current = current->next;
+    }
+    return 0;
+}
+
